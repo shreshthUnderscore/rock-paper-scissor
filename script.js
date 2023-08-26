@@ -17,27 +17,56 @@ function playRound(playerSelection, computerSelection)
 {
     if(playerSelection.toLowerCase() === "rock" && computerSelection.toLowerCase() === "scissor")
     {
-        return `You Win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()} beats ${computerSelection}`
+        return 1;
     }
     else if(playerSelection.toLowerCase() === "paper" && computerSelection.toLowerCase() === "rock")
     {
-        return `You Win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()} beats ${computerSelection}`
+        return 1;
     }
     else if(playerSelection.toLowerCase() === "scissor" && computerSelection.toLowerCase() === "paper")
     {
-        return `You Win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()} beats ${computerSelection}`
+        return 1;
     }
     else if(playerSelection.toLowerCase() === computerSelection.toLowerCase())
     {
-        return `Tie!`
+        return 0;
     }
     else
     {
-        return `You Lose! ${computerSelection} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()}`
+        return -1;
     }
 }
 
+function game()
+{
+    var playerScore = 0;
+    var computerScore = 0;
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+    for(let i=0; i<5; i++)
+    {
+        var playerSelection = prompt("Enter your choice: (rock, paper, scissor)","rock");
+        var computerChoice = getComputerChoice();
+        var boolRound = playRound(playerSelection, computerChoice);
+        
+        switch(boolRound)
+        {
+            case 1:
+                console.log(`You Win! ${[playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()]} beats ${computerChoice}`);
+                playerScore++;
+                break;
+            case 0:
+                console.log("Tie !");
+                break;
+            case -1:
+                console.log(`You Lose! ${computerChoice} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()}`);
+                computerScore++;
+                break;
+        }
+    }
+
+    console.log(`Final Score 
+    User: ${playerScore}
+    Computer: ${computerScore}`);
+}
+
+game();
