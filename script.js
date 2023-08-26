@@ -17,15 +17,15 @@ function playRound(playerSelection, computerSelection)
 {
     if(playerSelection.toLowerCase() === "rock" && computerSelection.toLowerCase() === "scissor")
     {
-        return `You Win! ${playerSelection} beats ${computerSelection}`
+        return `You Win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()} beats ${computerSelection}`
     }
     else if(playerSelection.toLowerCase() === "paper" && computerSelection.toLowerCase() === "rock")
     {
-        return `You Win! ${playerSelection} beats ${computerSelection}`
+        return `You Win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()} beats ${computerSelection}`
     }
     else if(playerSelection.toLowerCase() === "scissor" && computerSelection.toLowerCase() === "paper")
     {
-        return `You Win! ${playerSelection} beats ${computerSelection}`
+        return `You Win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()} beats ${computerSelection}`
     }
     else if(playerSelection.toLowerCase() === computerSelection.toLowerCase())
     {
@@ -33,7 +33,7 @@ function playRound(playerSelection, computerSelection)
     }
     else
     {
-        return `You Lose! ${computerSelection} beats ${playerSelection}`
+        return `You Lose! ${computerSelection} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()}`
     }
 }
 
