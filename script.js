@@ -1,67 +1,90 @@
 function getComputerChoice()
 {
-    var randomInt = Math.floor((Math.random() * 3) + 1);
+    let randomInt = Math.floor((Math.random() * 3));
     
     switch(randomInt)
     {
-        case 1:
+        case 0:
             return "Rock"
-        case 2:
+        case 1:
             return "Paper"
-        case 3:
+        case 2:
             return "Scissor"
     }
 }
 
-function playRound(playerSelection, computerSelection)
+function getPlayerChoice()
 {
-    if(playerSelection.toLowerCase() === "rock" && computerSelection.toLowerCase() === "scissor")
+    let playerSelection = prompt("Enter your choice: (rock, paper, scissor)","rock");
+
+    playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+
+    return playerSelection;
+}
+
+function playRound(computerChoice, playerChoice)
+{
+    if(playerChoice == "Rock" && computerChoice == "Scissor")
     {
         return 1;
     }
-    else if(playerSelection.toLowerCase() === "paper" && computerSelection.toLowerCase() === "rock")
+    else if(playerChoice == "Paper" && computerChoice == "Rock")
     {
         return 1;
     }
-    else if(playerSelection.toLowerCase() === "scissor" && computerSelection.toLowerCase() === "paper")
+    else if(playerChoice == "Scissor" && computerChoice == "Rock")
     {
         return 1;
     }
-    else if(playerSelection.toLowerCase() === computerSelection.toLowerCase())
+    else if (playerChoice == computerChoice)
     {
         return 0;
     }
-    else
+    else if(playerChoice != "Rock" && playerChoice != "Paper" && playerChoice && "Scissor")
     {
         return -1;
+    }
+    else 
+    {
+        return 2;
     }
 }
 
 function game()
 {
-    var playerScore = 0;
-    var computerScore = 0;
+    let playerScore = 0;
+    let computerScore = 0;
 
     for(let i=0; i<5; i++)
     {
-        var playerSelection = prompt("Enter your choice: (rock, paper, scissor)","rock");
-        var computerChoice = getComputerChoice();
-        var boolRound = playRound(playerSelection, computerChoice);
+        let playerSelection = getPlayerChoice();
+        let computerChoice = getComputerChoice();
+
+        var boolRound = playRound(computerChoice, playerSelection);
         
         switch(boolRound)
         {
             case 1:
-                console.log(`You Win! ${[playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()]} beats ${computerChoice}`);
+                console.log(`You Win! ${playerSelection} beats ${computerChoice}`);
                 playerScore++;
                 break;
             case 0:
                 console.log("Tie !");
+                --i;
                 break;
             case -1:
-                console.log(`You Lose! ${computerChoice} beats ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase()}`);
+                console.log(`Incorrect input !! Please enter again.`);
+                --i;
+                break;
+            case 2:
+                console.log(`You Lose! ${computerChoice} beats ${playerSelection}`);
                 computerScore++;
                 break;
         }
+
+        console.log(`Current Score: 
+        User: ${playerScore}
+        Computer: ${computerScore}`);
     }
 
     console.log(`Final Score 
